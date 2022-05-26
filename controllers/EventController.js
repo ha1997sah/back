@@ -127,9 +127,10 @@ async findCategoryById(req,res) {
 },
 async eliminerUser(req,res){
   try {
-    const event = await Event.findOne({where:{id:req.body.eventId}})
+    console.log(req.body.compId)
+    const event = await Event.findOne({where:{id:req.body.compId}})
     const user = await User.findOne({where:{id:req.body.userId}})
-
+console.log(event)
        await event.removeUser(user)
 
       res.send({
@@ -137,6 +138,7 @@ async eliminerUser(req,res){
       })
     
       }catch (error) {
+        console.log(error.message)
         res.status(400).send({
           error: error.message
         })
